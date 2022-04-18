@@ -77,7 +77,7 @@ static InterpretResult run() {
 #undef READ_CONSTANT
 #undef BINARY_OP
 }
-InterpretResult interpret(Chunk* chunk) {
+InterpretResult interpret(const char* source) {
 	compile(source);
 	return INTERPRET_OK;
 }

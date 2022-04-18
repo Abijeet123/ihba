@@ -81,6 +81,16 @@ static void skipWhitespace() {
 	}
 }
 
+static bool isAlpha(char c) {
+  return (c >= 'a' && c <= 'z') ||
+         (c >= 'A' && c <= 'Z') ||
+          c == '_';
+}
+
+static bool isDigit(char c) {
+	return c >= '0' && c <= '9';
+}
+
 static TokenType checkKeyword(int start, int length,
     const char* rest, TokenType type) {
   if (scanner.current - scanner.start == start + length &&
@@ -145,7 +155,7 @@ static Token number() {
 }
 
 static Token string() {
-	while(peek() != '"' && !isATEnd()) {
+	while(peek() != '"' && !isAtEnd()) {
 		if(peek() == '\n') scanner.line++;
 		advance();
 	}
@@ -160,16 +170,6 @@ void initScanner(const char* source) {
 	scanner.start = source;
 	scanner.current = source;
 	scanner.line = 1;
-}
-
-static bool isAlpha(char c) {
-  return (c >= 'a' && c <= 'z') ||
-         (c >= 'A' && c <= 'Z') ||
-          c == '_';
-}
-
-static book isDigit(char c) {
-	return c >= '0' && c <= '9';
 }
 
 Token scanToken() {

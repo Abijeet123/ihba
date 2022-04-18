@@ -51,7 +51,7 @@ static void repl() {
 }
 
 static void runFile(const char* path) {
-	char* source = readfile(path);
+	char* source = readFile(path);
 	InterpretResult result = interpret(source);
 	free(source);
 	
