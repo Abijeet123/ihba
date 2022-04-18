@@ -1,7 +1,7 @@
 #include "common.h"
 #include "debug.h"
 #include "vm.h"
-
+#include "compiler.h"
 #define DEBUG_TRACE_EXECUTION
 
 VM vm;
@@ -78,7 +78,6 @@ static InterpretResult run() {
 #undef BINARY_OP
 }
 InterpretResult interpret(Chunk* chunk) {
-	vm.chunk = chunk;
-	vm.ip = vm.chunk->code;
-	return run();
+	compile(source);
+	return INTERPRET_OK;
 }
