@@ -65,9 +65,14 @@ static void concatenate() {
 
 void initVM() {
 	resetStack();
+	vm.objects = NULL;
+	initTable(&vm.strings);
 }
 
-void freeVM() {}
+void freeVM() {
+	freeTable(&vm.strings);
+	
+}
 
 static InterpretResult run() {
 #define READ_BYTE() (*vm.ip++)
