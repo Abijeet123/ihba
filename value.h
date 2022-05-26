@@ -3,12 +3,15 @@
 
 #include "common.h"
 
+typedef struct Obj Obj;	//To be read is forward declaration for cyclic dependency
+typedef struct ObjString ObjString;
 
 
 typedef enum {
 	VAL_BOOL,
 	VAL_NIL,
 	VAL_NUMBER,
+	VAL_OBJ
 } ValueType;
 
 typedef struct {
@@ -16,6 +19,7 @@ typedef struct {
 	union {
 		bool boolean;
 		double number;
+		Obj* obj;
 	} as;
 } Value;
 
@@ -28,6 +32,9 @@ typedef struct {
 #define IS_BOOL(value)    ((value).type == VAL_BOOL)
 #define IS_NIL(value)     ((value).type == VAL_NIL)
 #define IS_NUMBER(value)  ((value).type == VAL_NUMBER)
+#define IS_OBJ(value) 	   ((value).type == VAL_OBJ)
+#define AS_OBJ(value) 	   ((value).as.obj)
+#define OBJ_VAL(object)   ((Value) {VAL_OBJ, {.obj = (Obj*) object}})
 
 typedef struct {
 	int capacity;
